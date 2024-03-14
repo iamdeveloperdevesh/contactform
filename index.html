@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="bootstrap-5/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container" style="min-height: calc(100vh);">
+        <div class="row mt-5">
+            <form onsubmit="sendMail();return false;">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Message</label>
+                    <textarea class="form-control" placeholder="Leave a comment here" id="subject" style="height: 100px"></textarea>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<script>
+
+    const sendMail = () => {
+
+        const email = document.getElementById("email");
+        const subject = document.getElementById("subject");
+
+        let ebody = `<b> Email: </b> ${email.value}
+        <br/>
+        <b> Message: </b> ${subject.value}
+        `
+        Email.send({
+            SecureToken : "367f9778-eeee-447f-971b-ebc85373ad5a",
+            To : `${email.value}`,
+            From : "test.fyntune@gmail.com",
+            Subject : "Test",
+            Body : ebody
+        }).then(
+        message => alert(message)
+        );
+    }
+    
+</script>
+
+</html>
